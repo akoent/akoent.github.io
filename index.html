@@ -1,0 +1,175 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="XYZ.com offers fresh organic juices including Orange and Cherry juices. Taste the best quality with every sip!">
+    <meta name="keywords" content="orange juice, cherry juice, organic juices, fresh juices, buy juices online">
+    <meta name="author" content="XYZ.com">
+    <title>Fresh Organic Juices | XYZ.com</title>
+
+    <style>
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Scrollable Section */
+        #scroll-section {
+            height: 100vh; /* Full viewport height */
+            background-color: #e2e2e2;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .scroll-text {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        /* Product Display Section */
+        #product-section {
+            background-color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .product-images {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-item {
+            width: 48%;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Scroll and Smooth Transition */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-item {
+                width: 100%;
+            }
+
+            .product-images {
+                justify-content: center;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to XYZ.com</h1>
+        <nav>
+            <ul>
+                <li><a href="#scroll-section">Scroll Section</a></li>
+                <li><a href="#product-section">Products</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Scrolling Section (e.g., introduction, welcome message, etc.) -->
+    <section id="scroll-section">
+        <h2>Welcome to XYZ Organic Juices!</h2>
+        <p class="scroll-text">Scroll down to explore our fresh juices made with love and care.</p>
+        <!-- You can add more content here, like an introductory message or video -->
+    </section>
+
+    <!-- Product Display Section -->
+    <section id="product-section">
+        <h2>Choose Your Fresh Organic Juice</h2>
+        <p>Experience the best quality organic juices! Select one or both of our refreshing juices and enjoy the natural goodness.</p>
+
+        <div class="product-images">
+            <!-- Orange Juice -->
+            <div class="product-item">
+                <img src="oj1.jpg" alt="Fresh Organic Orange Juice">
+                <h3>Orange Juice</h3>
+                <p>100% organic and fresh orange juice. No added sugars, just pure, natural goodness!</p>
+                <label>
+                    <input type="checkbox" name="juice[]" value="Orange Juice">
+                    Add to cart
+                </label>
+            </div>
+
+            <!-- Cherry Juice -->
+            <div class="product-item">
+                <img src="cj05.jpg" alt="Fresh Organic Cherry Juice">
+                <h3>Cherry Juice</h3>
+                <p>Fresh, organic cherry juice made from the ripest cherries. Sweet and full of flavor!</p>
+                <label>
+                    <input type="checkbox" name="juice[]" value="Cherry Juice">
+                    Add to cart
+                </label>
+            </div>
+        </div>
+
+        <!-- Funnel Form -->
+        <form id="capture-form" action="capture_data.php" method="POST">
+            <h3>Get Your Organic Juice Offer!</h3>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br><br>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <button type="submit">Submit & Get Offer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 XYZ.com. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
