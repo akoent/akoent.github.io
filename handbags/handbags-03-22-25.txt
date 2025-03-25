@@ -1,0 +1,87 @@
+﻿<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Blank template</title>
+
+<!-- Load external CSS styles -->
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<h1>Women Fashion $$$ My Awesome Space $$$</h1>
+<!-- Load external JavaScript -->
+<script src="scripts.js"></script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Our Best Picks</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div class="max-w-4xl mx-auto p-6">
+<h1 class="text-3xl font-bold text-center mb-6">Exclusive Deals Just for You</h1>
+<!-- Lead Capture Form -->
+<div class="bg-white p-6 shadow rounded-lg mb-6">
+<h2 class="text-xl font-semibold mb-4">Get Exclusive Discounts!</h2>
+<form id="leadForm" class="space-y-4">
+<input type="text" id="firstName" placeholder="First Name" class="w-full p-2 border rounded">
+<input type="text" id="lastName" placeholder="Last Name" class="w-full p-2 border rounded">
+<input type="email" id="email" placeholder="Email Address" class="w-full p-2 border rounded">
+<button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Subscribe</button>
+</form>
+</div>
+<!-- Product Listings -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-4 shadow rounded-lg">
+<img src="GucciHandBag.jpg" alt="Gucci Hand Bag" class="w-full rounded">
+<h3 class="text-lg font-semibold mt-2">Gucci Hand Bag</h3>
+<a href="#" class="text-blue-600">Buy on Amazon</a>
+</div>
+<div class="bg-white p-4 shadow rounded-lg">
+<img src="ChanelHandBag.jpg" alt="Chanel Hand Bag" class="w-full rounded">
+<h3 class="text-lg font-semibold mt-2">Chanel Hand Bag</h3>
+<a href="#" class="text-blue-600">Buy on Amazon</a>
+</div>
+<div class="bg-white p-4 shadow rounded-lg">
+<img src="LouisVuittonHandBag.jpg" alt="Louis Vuitton Hand Bag" class="w-full rounded">
+<h3 class="text-lg font-semibold mt-2">Louis Vuitton Hand Bag</h3>
+<a href="#" class="text-blue-600">Buy on Amazon</a>
+</div>
+<div class="bg-white p-4 shadow rounded-lg">
+<img src="DiorHandBag.jpg" alt="Christian Dior Hand Bag" class="w-full rounded">
+<h3 class="text-lg font-semibold mt-2">Christian Dior Hand Bag</h3>
+<a href="#" class="text-blue-600">Buy on Amazon</a>
+</div>
+</div>
+</div>
+
+<script>
+document.getElementById('leadForm').addEventListener('submit', function(event) {
+event.preventDefault();
+const firstName = document.getElementById('firstName').value;
+const lastName = document.getElementById('lastName').value;
+const email = document.getElementById('email').value;
+// Save lead data to a text file using a server request
+fetch('/save_lead', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ firstName, lastName, email })
+}).then(response => response.text())
+.then(data => alert(data))
+.catch(error => console.error('Error:', error));
+});
+</script>
+</body>
+</html>
+
