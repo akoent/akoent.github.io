@@ -1,5 +1,4 @@
  ### Data Storage Page (save_data.php)
-```php
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = [
