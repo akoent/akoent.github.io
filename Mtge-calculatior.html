@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mortgage Acceleration Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+}
+.container {
+    max-width: 600px;
+    background: #fff;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h2, h3 {
+    text-align: center;
+}
+label {
+    font-weight: bold;
+}
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+}
+button {
+    width: 100%;
+    background: #3a5a40;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #2d4631;
+}
+.results, .chart-container {
+    display: none;
+    margin-top: 25px;
+}
+.highlight {
+    color: #3a5a40;
+    font-size: 18px;
+    font-weight: bold;
+}
+.small {
+    font-size: 13px;
+    color: #555;
+    margin-top: 15px;
+}
+.toggle {
+    font-size: 14px;
+    color: #3a5a40;
+    cursor: pointer;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Mortgage Acceleration Calculator</h2>
+
+<!-- INPUTS -->
+<label>Loan Amount ($)</label>
+<input type="number" id="loan" value="450000">
+
+<label>Interest Rate (%)</label>
+<input type="number" id="rate" step="0.01" value="6.5">
+
+<label>Loan Term (Years)</label>
+<input type="number" id="term" value="30">
+
+<label>Payment Type</label>
+<select id="paymentType">
+    <option value="monthly">Monthly</option>
+    <option value="biweekly">Biweekly</option>
+</select>
+
+<label>Extra Payment Per Period ($)</label>
+<input type="number" id="extra" value="500">
+
+<!-- LEAD CAPTURE -->
+<h3>See Your Results</h3>
+<input type="email" id="email" placeholder="Enter your email to view results" required>
+
+<button onclick="calculate()">Calculate My Savings</button>
+
+<div class="toggle" onclick="toggleInfo()">Why this works without refinancing</div>
+<p id="info" class="small" style="display:none;">
+This strategy restructures how payments are applied to principal.
+It does NOT require refinancing, changing lenders, or taking new loans.
+</p>
+
+<!-- RESULTS -->
+<div class="results" id="results"></div>
+
+<!-- CHART -->
+<div class="chart-container">
+<canvas id="chart"></canvas>
+</div>
+
+<p class="small">
+⚠️ Disclaimer: This calculator provides estimates only. Results vary based on loan terms, interest rate, payment behavior, and timing. This is not financial or legal advice.
+</p>
+</div>
+
+<script>
+function toggleInfo() {
+    let el = document.getElementById("info");
+    el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+function calculate() {
+    let email = document.getElementById("email").value;
+    if (!email) {
+        alert("Please enter your email to view results.");
+        return;
+    }
+
+    let loan = parseFloat(document.getElementById("loan").value);
+    let annualRate = parseFloat(document.getElementById("rate").value) / 100;
+    let years = parseInt(document.getElementById("term").value);
+    let extra = parseFloat(document.getElementById("extra").value);
+    let type = document.getElementById("paymentType").value;
+
+    let periods = type === "biweekly" ? 26 : 12;
+    let rate = annualRate / periods;
+    let totalPeriods = years * periods;
+
+    let payment = loan * rate / (1 - Math.pow(1 + rate, -totalPeriods));
+    let balance = loan;
+    let interestStandard = 0;
+    let interestAccel = 0;
+    let monthsAccel = 0;
+
+    let standardBalances = [];
+    let accelBalances = [];
+
+    // Standard
+    let bal = loan;
+    for (let i = 0; i < totalPeriods; i++) {
+        let int = bal * rate;
+        bal = bal + int - payment;
+        interestStandard += int;
+        standardBalances.push(bal > 0 ? bal : 0);
+    }
+
+    // Accelerated
+    bal = loan;
+    while (bal > 0) {
+        let int = bal * rate;
+        let pay = payment + extra;
+        if (pay > bal + int) pay = bal + int;
+        bal = bal + int - pay;
+        interestAccel += int;
+        accelBalances.push(bal > 0 ? bal : 0);
+        monthsAccel++;
+    }
+
+    let interestSaved = interestStandard - interestAccel;
+    let timeSavedYears = ((totalPeriods - monthsAccel) / periods).toFixed(1);
+
+    document.getElementById("results").style.display = "block";
+    document.getElementById("results").innerHTML = `
+        <p>Total Interest (Standard): $${interestStandard.toFixed(0)}</p>
+        <p>Total Interest (Accelerated): $${interestAccel.toFixed(0)}</p>
+        <p class="highlight">Interest Saved: $${interestSaved.toFixed(0)}</p>
+        <p class="highlight">Time Saved: ${timeSavedYears} years</p>
+        <p><strong>Next Step:</strong> Get a personalized acceleration plan.</p>
+    `;
+
+    document.querySelector(".chart-container").style.display = "block";
+
+    new Chart(document.getElementById("chart"), {
+        type: 'line',
+        data: {
+            labels: standardBalances.map((_, i) => i + 1),
+            datasets: [
+                {
+                    label: 'Standard Mortgage Balance',
+                    data: standardBalances,
+                    borderColor: '#999',
+                    fill: false
+                },
+                {
+                    label: 'Accelerated Mortgage Balance',
+                    data: accelBalances,
+                    borderColor: '#3a5a40',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+}
+</script>
+
+</body>
+</html>
