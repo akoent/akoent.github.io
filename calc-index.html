@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Acceleration Calculator</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f8f8;
+  margin: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #3a5a40;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: #3a5a40;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2d4631;
+}
+
+#results, #thankYouSection {
+  display: none;
+  margin-top: 30px;
+}
+
+.result-box {
+  background: #f3f6f3;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.links {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.links a {
+  padding: 14px 22px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.home-link {
+  border: 2px solid #3a5a40;
+  color: #3a5a40;
+}
+
+.order-link {
+  background: #3a5a40;
+  color: #ffffff;
+}
+
+.small {
+  font-size: 13px;
+  color: #666;
+  margin-top: 20px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Mortgage Acceleration Calculator</h1>
+<p style="text-align:center;">
+Estimate how much interest you could save by accelerating your mortgage.
+</p>
+
+<!-- INPUTS -->
+<label>Loan Amount ($)</label>
+<input type="number" id="loan" placeholder="e.g. 450000">
+
+<label>Interest Rate (%)</label>
+<input type="number" id="rate" step="0.01" placeholder="e.g. 6.5">
+
+<label>Loan Term (Years)</label>
+<input type="number" id="term" placeholder="e.g. 30">
+
+<label>Extra Monthly Payment ($)</label>
+<input type="number" id="extra" placeholder="e.g. 500">
+
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter your email to see results" required>
+
+<button onclick="calculate()">Calculate My Savings</button>
+
+<!-- RESULTS -->
+<div id="results">
+  <h2>Your Results</h2>
+  <div class="result-box" id="resultText"></div>
+</div>
+
+<!-- THANK YOU + LINKS -->
+<div id="thankYouSection">
+
+  <h2>Thank You 🙏</h2>
+
+  <p style="text-align:center; max-width:600px; margin:15px auto;">
+    We hope this calculator gave you clarity on what’s possible when payments
+    are applied strategically.
+  </p>
+
+  <div class="links">
+    <a href="index.html" class="home-link">← Back to Home</a>
+    <a id="orderLink" class="order-link" target="_blank">Continue to Order →</a>
+  </div>
+
+  <p class="small">
+    Educational purposes only. Not financial advice.
+  </p>
+
+</div>
+
+</div>
+
+<script>
+function calculate() {
+  const loan = parseFloat(document.getElementById("loan").value);
+  const rate = parseFloat(document.getElementById("rate").value) / 100 / 12;
+  const termYears = parseInt(document.getElementById("term").value);
+  const extra = parseFloat(document.getElementById("extra").value);
+  const email = document.getElementById("email").value;
+
+  if (!loan || !rate || !termYears || !email) {
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  const months = termYears * 12;
+  const monthlyPayment =
+    loan * (rate * Math.pow(1 + rate, months)) /
+    (Math.pow(1 + rate, months) - 1);
+
+  // Original total interest
+  const totalPaidOriginal = monthlyPayment * months;
+  const interestOriginal = totalPaidOriginal - loan;
+
+  // Accelerated payoff simulation
+  let balance = loan;
+  let totalPaid = 0;
+  let month = 0;
+
+  while (balance > 0 && month < 1000) {
+    const interest = balance * rate;
+    const payment = Math.min(balance + interest, monthlyPayment + extra);
+    balance = balance + interest - payment;
+    totalPaid += payment;
+    month++;
+  }
+
+  const interestAccelerated = totalPaid - loan;
+  const interestSaved = interestOriginal - interestAccelerated;
+  const yearsSaved = termYears - (month / 12);
+
+  document.getElementById("resultText").innerHTML = `
+    <p><strong>Estimated Interest Saved:</strong> $${interestSaved.toLocaleString()}</p>
+    <p><strong>Time Saved:</strong> ${yearsSaved.toFixed(1)} years</p>
+    <p><strong>New Payoff Time:</strong> ${(month / 12).toFixed(1)} years</p>
+  `;
+
+  document.getElementById("results").style.display = "block";
+  document.getElementById("thankYouSection").style.display = "block";
+
+  // Gumroad link with prefilled email
+  const gumroadUrl =
+    "https://gumroad.com/l/YOUR_PRODUCT" +
+    "?email=" + encodeURIComponent(email) +
+    "&utm_source=calculator";
+
+  document.getElementById("orderLink").href = gumroadUrl;
+}
+</script>
+
+</body>
+</html>
