@@ -1,0 +1,48 @@
+styles.css
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9fafb;
+  color: #333;
+}
+
+header {
+  background: #ffd700;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cta {
+  display: inline-block;
+  background: #16a34a;
+  color: white;
+  padding: 14px 26px;
+  margin-top: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+.cta-section {
+  background: #e5f9ed;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  color: #777;
+}
