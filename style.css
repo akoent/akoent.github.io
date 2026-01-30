@@ -1,5 +1,4 @@
 style.css
-/* ========== Base (Mobile First) ========== */
 * {
   box-sizing: border-box;
 }
@@ -12,7 +11,6 @@ body {
   line-height: 1.6;
 }
 
-/* Header */
 header {
   background: #0f172a;
   color: white;
@@ -29,7 +27,6 @@ header p {
   font-size: 1rem;
 }
 
-/* CTA Button */
 .cta {
   display: inline-block;
   background: #16a34a;
@@ -42,7 +39,6 @@ header p {
   min-width: 44px; /* touch target */
 }
 
-/* Sections */
 section {
   max-width: 100%;
   margin: 24px auto;
@@ -63,7 +59,6 @@ ul li {
   font-size: 1rem;
 }
 
-/* CTA Section */
 .cta-section {
   background: #e5f9ed;
   padding: 32px 16px;
@@ -74,7 +69,6 @@ ul li {
   font-size: 1.5rem;
 }
 
-/* Footer */
 footer {
   text-align: center;
   font-size: 13px;
@@ -82,7 +76,6 @@ footer {
   color: #777;
 }
 
-/* ========== Tablet (≥ 600px) ========== */
 @media (min-width: 600px) {
   header {
     padding: 60px 24px;
@@ -103,7 +96,6 @@ footer {
   }
 }
 
-/* ========== Desktop (≥ 900px) ========== */
 @media (min-width: 900px) {
   header h1 {
     font-size: 2.6rem;
