@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mortgage Acceleration Readiness Checklist | Arrive4u</title>
+  <meta name="description" content="Find out if mortgage acceleration is right for you. Free checklist and calculator to estimate years saved and interest reduction.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Minimal, fast CSS -->
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #0f172a;
+      color: #fff;
+      padding: 48px 16px;
+      text-align: center;
+    }
+    section {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    h1, h2 {
+      line-height: 1.3;
+    }
+    .image-box {
+      background: #e5e7eb;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 24px 0;
+      font-size: 14px;
+      color: #555;
+    }
+    .cta {
+      display: inline-block;
+      background: #16a34a;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 16px;
+    }
+    .calculator {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: #0f172a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 20px;
+      background: #e5f9ed;
+      padding: 16px;
+      border-radius: 6px;
+      display: none;
+    }
+    footer {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      padding: 32px 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Is Mortgage Acceleration Right for You?</h1>
+  <p>Free readiness checklist + personalized calculator</p>
+</header>
+
+<section>
+  <div class="image-box">Image Placeholder (Homeowner / Calculator)</div>
+
+  <h2>Know Before You Change Anything</h2>
+  <p>
+    Mortgage acceleration is a strategy — not a product.
+    This page helps you understand whether it fits your mortgage and cash flow,
+    and what it could look like using your own numbers.
+  </p>
+
+  <a href="#calculator" class="cta">Check Your Numbers Below</a>
+
+  <!-- CALCULATOR -->
+  <div class="calculator" id="calculator">
+    <h2>Mortgage Acceleration Calculator</h2>
+
+    <label>Current Mortgage Balance ($)</label>
+    <input type="number" id="balance" placeholder="250000">
+
+    <label>Interest Rate (%)</label>
+    <input type="number" step="0.01" id="rate" placeholder="5.5">
+
+    <label>Monthly Payment ($)</label>
+    <input type="number" id="payment" placeholder="1600">
+
+    <label>Available Extra Monthly Cash ($)</label>
+    <input type="number" id="extra" placeholder="500">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<footer>
+  Arrive4u.com | Educational Use Only | Not a Loan Offer | Results Vary
+</footer>
+
+<!-- Lightweight Calculator Logic -->
+<script>
+function calculate() {
+  const balance = parseFloat(document.getElementById('balance').value);
+  const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+  const payment = parseFloat(document.getElementById('payment').value);
+  const extra = parseFloat(document.getElementById('extra').value);
+
+  if (!balance || !rate || !payment) return;
+
+  const monthsStandard =
+    Math.log(payment / (payment - balance * rate)) /
+    Math.log(1 + rate);
+
+  const effectiveBalance = Math.max(balance - extra, 0);
+
+  const monthsAccelerated =
+    Math.log(payment / (payment - effectiveBalance * rate)) /
+    Math.log(1 + rate);
+
+  const yearsSaved = ((monthsStandard - monthsAccelerated) / 12).toFixed(1);
+  const interestSaved =
+    ((monthsStandard - monthsAccelerated) * payment).toFixed(0);
+
+  const results = document.getElementById('results');
+  results.style.display = 'block';
+  results.innerHTML = `
+    <strong>Estimated Results:</strong><br>
+    Years saved: <b>${yearsSaved}</b><br>
+    Estimated interest reduction: <b>$${interestSaved}</b>
+    <p style="font-size:12px;margin-top:8px;">
+      Estimates only. Assumes consistent behavior. Does not change loan terms.
+    </p>
+  `;
+}
+</script>
+
+</body>
+</html>
