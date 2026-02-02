@@ -76,7 +76,55 @@
       who want clarity and control over their mortgage payoff timeline.
     </p>
   </section>
+<sectio>
+  div class="calculator">
+  <h2>Mortgage Interest Reality Check</h2>
 
+  <label>Loan Amount ($)</label>
+  <input type="number" id="loan" placeholder="300000">
+
+  <label>Interest Rate (%)</label>
+  <input type="number" step="0.01" id="rate" placeholder="6.5">
+
+  <label>Loan Term (years)</label>
+  <input type="number" id="years" placeholder="30">
+
+  <button onclick="calculate()">Calculate</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+function calculate() {
+  let P = document.getElementById("loan").value;
+  let r = document.getElementById("rate").value / 100 / 12;
+  let n = document.getElementById("years").value * 12;
+
+  let monthly = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  let totalPaid = monthly * n;
+  let interest = totalPaid - P;
+
+  document.getElementById("result").innerHTML =
+    "Estimated total interest paid: <strong>$" +
+    Math.round(interest).toLocaleString() +
+    "</strong><br><br>" +
+    "Want to reduce this? Get the free Mortgage Acceleration Guide below.";
+}
+</script>
+  <!-- WHAT YOU'LL LEARN -->
+  <section>
+    <h2>What You’ll Learn Inside the Free Guide</h2>
+    <ul>
+      <li>How mortgage amortization really works</li>
+      <li>Why small extra payments matter more than large late ones</li>
+      <li>Biweekly payments vs extra principal explained</li>
+      <li>How to reduce interest legally</li>
+      <li>Common mistakes homeowners should avoid</li>
+      <li>Real U.S. homeowner examples</li>
+    </ul>
+  </section>
+
+</sectio>
   <!-- CTA -->
   <section class="cta-section">
     <h2>Get the Free Mortgage Acceleration Guide</h2>
