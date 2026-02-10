@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Mortgage Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>Free Mortgage Calculator</h1>
+  <p>See your real payment, interest, and payoff timeline in seconds.</p>
+  <button onclick="openPopup()">Get Free Access</button>
+</header>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Popup -->
+<div id="popup">
+  <button class="close" onclick="closePopup()">×</button>
+
+  <div id="step-one">
+    <h2>Get the Free Calculator</h2>
+    <p>No guesswork. Real numbers. Instant clarity.</p>
+
+    <input type="email" placeholder="Enter your email (optional)">
+    <button onclick="showUpsell()">Access Free Tool</button>
+
+    <small>🔒 No spam. Unsubscribe anytime.</small>
+  </div>
+
+  <div id="step-two">
+    <h2>Want to Pay Off Your Mortgage Faster?</h2>
+    <p>
+      Upgrade to the <strong>Full Mortgage Acceleration System</strong>:
+    </p>
+
+    <ul>
+      <li>✔ Advanced calculator</li>
+      <li>✔ Step-by-step payoff strategies</li>
+      <li>✔ Save tens of thousands in interest</li>
+    </ul>
+
+    <a
+      href="https://YOURNAME.gumroad.com/l/YOURPRODUCT"
+      class="gumroad-btn"
+      target="_blank"
+    >
+      Unlock Full Version – $19.99
+    </a>
+
+    <button class="secondary" onclick="closePopup()">
+      No thanks, I’ll stick with the free version
+    </button>
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
+
