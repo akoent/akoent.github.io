@@ -138,6 +138,9 @@ ul {
 
 }
 
+body.popup-open {
+  overflow: hidden;
+}
 
 /* =========================
    TABLETS (768px and up)
