@@ -52,36 +52,7 @@ Estimate how much interest you could save by accelerating your mortgage.
 <input type="email" id="email" placeholder="Enter your email to see results" required>
 
 <button onclick="calculate()">Calculate My Savings</button>
-
-<!-- RESULTS -->
-<div id="results">
-  <h2>Your Results</h2>
-  <div class="result-box" id="resultText"></div>
-</div>
-
-<!-- THANK YOU + LINKS -->
-<div id="thankYouSection">
-
-  <h2>Thank You 🙏</h2>
-
-  <p style="text-align:center; max-width:600px; margin:15px auto;">
-    We hope this calculator gave you clarity on what’s possible when payments
-    are applied strategically.
-  </p>
-
-  <div class="links">
-    <a href="index.html" class="home-link">← Back to Home</a>
-    <a id="orderLink" class="order-link" target="_blank">Continue to Order →</a>
-  </div>
-
-  <p class="small">
-    Educational purposes only. Not financial advice.
-  </p>
-
-</div>
-
-</div>
-
+    
 <script>
 function calculate() {
   const loan = parseFloat(document.getElementById("loan").value);
@@ -139,6 +110,36 @@ function calculate() {
   document.getElementById("orderLink").href = gumroadUrl;
 }
 </script>
+<!-- RESULTS -->
+<div id="results">
+  <h2>Your Results</h2>
+  <div class="result-box" id="resultText"></div>
+</div>
+
+<!-- THANK YOU + LINKS -->
+<div id="thankYouSection">
+
+  <h2>Thank You 🙏</h2>
+
+  <p style="text-align:center; max-width:600px; margin:15px auto;">
+    We hope this calculator gave you clarity on what’s possible when payments
+    are applied strategically.
+  </p>
+
+  <div class="links">
+    <a href="index.html" class="home-link">← Back to Home</a>
+    <a id="orderLink" class="order-link" target="_blank">Continue to Order →</a>
+  </div>
+
+  <p class="small">
+    Educational purposes only. Not financial advice.
+  </p>
+
+</div>
+
+</div>
+
+
     ============================
     <section class="calculator">
   <h2>Mortgage Calculator</h2>
