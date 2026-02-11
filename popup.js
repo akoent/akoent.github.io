@@ -42,4 +42,9 @@ function calculateMortgage() {
 
   document.getElementById("totalInterest").textContent =
     `$${interest.toFixed(2)}`;
+
+  document.body.classList.add("popup-open");
+  
+  document.body.classList.remove("popup-open");
+  
 }
