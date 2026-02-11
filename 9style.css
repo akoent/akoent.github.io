@@ -45,6 +45,8 @@ body {
   background: #fff;
   width: 95%;
   max-width: 420px;
+  max-height: 90vh;           /* 👈 prevents overflow */
+  overflow-y: auto;           /* 👈 enables internal scroll */
   padding: 20px;
   border-radius: 12px;
   display: none;
