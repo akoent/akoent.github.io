@@ -90,3 +90,21 @@ button, .gumroad-btn {
 ul {
   padding-left: 20px;
 }
+.calculator {
+  max-width: 500px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.calculator label {
+  display: block;
+  margin-top: 12px;
+}
+
+.calculator button {
+  margin-top: 20px;
+  background: #0a7cff;
+  color: white;
+}
