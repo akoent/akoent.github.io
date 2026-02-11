@@ -124,6 +124,20 @@ ul {
   color: white;
 }
 
+/* =========================
+    MOBILE Specific Override
+=========================== */
+@media (max-width: 480px) {
+
+  #popup {
+    top: 20px;                 /* 👈 move down from top */
+    transform: translateX(-50%);
+    max-height: 85vh;
+    border-radius: 16px;
+  }
+
+}
+
 
 /* =========================
    TABLETS (768px and up)
