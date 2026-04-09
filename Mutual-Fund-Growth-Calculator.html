@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mutual Fund Calculator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 500px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; }
+    .result { font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<h2>Mutual Fund Growth Calculator</h2>
+<p>See how your investment can grow over time.</p>
+
+<input type="number" id="monthly" placeholder="Monthly Investment ($)">
+<input type="number" id="rate" placeholder="Annual Return (%)">
+<input type="number" id="years" placeholder="Years">
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="output"></div>
+
+<script>
+function calculate() {
+  let m = document.getElementById('monthly').value;
+  let r = document.getElementById('rate').value / 100 / 12;
+  let y = document.getElementById('years').value * 12;
+
+  let future = m * ((Math.pow(1 + r, y) - 1) / r) * (1 + r);
+  let invested = m * y;
+
+  document.getElementById('output').innerHTML =
+    "Total Invested: $" + invested.toFixed(2) + "<br>" +
+    "Estimated Value: $" + future.toFixed(2) + "<br>" +
+    "Profit: $" + (future - invested).toFixed(2);
+}
+</script>
+
+<hr>
+
+<p><strong>Want a step-by-step investing plan?</strong></p>
+<p><a href="https://arrive4u.com">Get the beginner guide here</a></p>
+
+</body>
+</html>
